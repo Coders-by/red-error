@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<title>正午对决 · 新封面</title>
+<style>
+@font-face{font-family:Serif;src:url(fonts/NotoSerifSC.ttf);font-weight:200 900}
+@font-face{font-family:Rye;src:url(fonts/Rye.ttf)}
+*{margin:0;box-sizing:border-box;letter-spacing:0}
+body{width:1920px;height:1080px;overflow:hidden;background:#121818;color:#fff4d9;font-family:Serif,serif}
+.left,.right{position:absolute;top:0;height:790px;width:1090px;overflow:hidden}
+.left{left:0;clip-path:polygon(0 0,100% 0,81% 100%,0 100%)}
+.right{right:0;clip-path:polygon(20% 0,100% 0,100% 100%,0 100%)}
+.left img{height:100%;width:100%;object-fit:cover;object-position:39% center;filter:contrast(1.1) saturate(.8)}
+.right img{height:100%;width:100%;object-fit:cover;object-position:36% center;transform:scaleX(-1);filter:contrast(1.12) saturate(.75)}
+.scene{position:absolute;left:0;bottom:0;width:1920px;height:320px;object-fit:cover;object-position:center 68%;opacity:.85}
+.top-shade{position:absolute;top:0;left:0;right:0;height:135px;background:#091211a8}
+.shade{position:absolute;left:0;right:0;top:580px;height:500px;background:linear-gradient(0deg,#071412f2 0%,#071412e8 46%,#071412c7 70%,transparent 100%)}
+.eyebrow{position:absolute;left:72px;top:35px;font-size:49px;font-weight:700;text-shadow:0 2px 7px #000}
+.chapter{position:absolute;right:68px;top:44px;font-size:35px;color:#9bdbc9;font-weight:700}
+.headline{position:absolute;left:0;right:0;top:610px;text-align:center;font-weight:900;font-size:165px;line-height:1.15;text-shadow:0 5px 0 #07110e,0 10px 22px #07110e}
+.headline em{font-family:Rye;font-size:95px;font-style:normal;color:#ef6a4b;margin:0 26px}
+.headline .agent{color:#b9eddf}
+.sub{position:absolute;left:0;right:0;top:811px;text-align:center;font-size:79px;line-height:1.25;font-weight:800;text-shadow:0 3px 10px #000}
+.credit{position:absolute;left:78px;bottom:58px;font-size:37px;font-weight:700;color:#efc57c}
+.format{position:absolute;right:230px;bottom:61px;font-size:28px;color:#cfdbce}
+.ratio43{width:1440px}
+.ratio43 .left,.ratio43 .right{width:850px}
+.ratio43 .scene{width:1440px}
+.ratio43 .eyebrow{left:50px;top:40px;font-size:39px}
+.ratio43 .chapter{right:46px;top:46px;font-size:30px}
+.ratio43 .headline{font-size:142px;top:617px}
+.ratio43 .headline em{font-size:79px;margin:0 19px}
+.ratio43 .sub{font-size:64px;top:817px}
+.ratio43 .credit{left:52px;font-size:34px}
+.ratio43 .format{right:185px;font-size:24px}
+</style>
+<div class="left"><img src="img_hd/arthur_face.jpg"></div>
+<div class="right"><img src="img_hd/milton.jpg"></div>
+<img class="scene" src="img_hd/noon_standoff.jpg">
+<div class="top-shade"></div><div class="shade"></div>
+<div class="eyebrow">我用 AI，把大镖客拍进了办公室</div><div class="chapter">正午对决</div>
+<div class="headline">亚瑟<em>VS</em><span class="agent">Agent</span></div>
+<div class="sub">这场对决，竟然拍出来了</div>
+<div class="credit">红色报错：救赎</div><div class="format">AI 剧情短片 · 完整配音版</div>
+<script>if(new URLSearchParams(location.search).get('ratio')==='43')document.body.classList.add('ratio43');</script>
+</html>

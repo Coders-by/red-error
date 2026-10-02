@@ -1,0 +1,20 @@
+# ---- 本地凭据，绝不入库 ----
+.minimax
+.env
+.env.*
+
+# ---- 成片、混音与音频素材（体积过大，见 README「素材不在仓库内」） ----
+out/
+audio/
+
+# ---- 高清帧序列与高清剧照 ----
+web/video/
+web/img_hd/
+web/img_hd_prev/
+web/imgx_hd/
+web/imgx_hd_prev/
+
+# ---- Python / macOS ----
+__pycache__/
+*.pyc
+.DS_Store

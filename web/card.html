@@ -1,0 +1,69 @@
+<!doctype html>
+<meta charset="utf-8">
+<!-- B 站置顶评论配套卡片：制作复盘。用 DevTools 协议截图导出 -->
+<style>
+@font-face { font-family: "Noto Serif SC"; src: url(fonts/NotoSerifSC.ttf); font-weight: 200 900; }
+@font-face { font-family: "Rye"; src: url(fonts/Rye.ttf); }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 1080px; background: #0d0b09; font-family: "Noto Serif SC", serif; color: #e9dfc8; }
+.hero { position: relative; height: 560px; background: url(img_hd/noon_standoff.jpg) 50% 45% / cover no-repeat; }
+.hero::after { content: ""; position: absolute; inset: 0;
+  background: linear-gradient(0deg, #0d0b09 0%, rgba(13,11,9,.75) 30%, rgba(13,11,9,.15) 70%, rgba(13,11,9,.35) 100%); }
+.ht { position: absolute; z-index: 2; left: 0; right: 0; bottom: 40px; text-align: center; }
+.small { font-size: 22px; font-weight: 600; letter-spacing: .4em; color: #c9a25a; }
+.red { font-size: 118px; font-weight: 900; color: #b3231b; letter-spacing: .06em; line-height: 1.1; margin-top: 18px;
+  text-shadow: 0 0 36px rgba(179,35,27,.4), 0 5px 20px rgba(0,0,0,.9); }
+.en { font-family: "Rye", serif; font-size: 34px; letter-spacing: .32em; color: #efe4c9; margin-top: 10px; }
+.wrap { padding: 20px 96px 70px; }
+.spec { text-align: center; font-size: 22px; color: #a8987a; letter-spacing: .12em; }
+.rule { height: 1px; margin: 44px auto; width: 70%; background: linear-gradient(90deg, transparent, #b3231b 20%, #b3231b 80%, transparent); }
+.item { display: flex; gap: 30px; margin-bottom: 44px; }
+.no { flex: none; width: 64px; font-family: "Rye", serif; font-size: 40px; color: #b3231b; line-height: 1.2; }
+.h { font-size: 34px; font-weight: 700; color: #f2e9d4; letter-spacing: .06em; margin-bottom: 12px; }
+.p { font-size: 24px; line-height: 1.75; color: #bfb398; letter-spacing: .02em; }
+.p b { color: #e9dfc8; font-weight: 600; }
+.q { text-align: center; font-size: 30px; font-style: italic; color: #cbbd9f; letter-spacing: .12em; margin-top: 10px; }
+.foot { text-align: center; margin-top: 40px; font-size: 18px; letter-spacing: .2em; color: #7d6b4b; line-height: 1.9; }
+</style>
+<div class="hero"><div class="ht">
+  <div class="small">幕 后 · 制 作 笔 记</div>
+  <div class="red">红色报错</div>
+  <div class="en">REDEMPTION</div>
+</div></div>
+<div class="wrap">
+  <div class="spec">8 分 47 秒 · 七章加尾声 · 43 场戏 · 前后 11 版成片</div>
+  <div class="rule"></div>
+
+  <div class="item"><div class="no">I</div><div>
+    <div class="h">默片</div>
+    <div class="p">全片没有配音，对白都放在字幕和字卡里。试过几种 AI 配音，情绪总差一点，最后全删了。唯一出声的，是片尾那句「你好，世界」。</div>
+  </div></div>
+
+  <div class="item"><div class="no">II</div><div>
+    <div class="h">定妆照</div>
+    <div class="p">AI 生图很难让同一个人每次都长得一样。所以先给老亚、阿迭和整个团队各做一张定妆照，之后每生成一个镜头，都把定妆照一起发过去，再写明谁在场、站在哪、穿什么。</div>
+  </div></div>
+
+  <div class="item"><div class="no">III</div><div>
+    <div class="h">一份分镜</div>
+    <div class="p">台词、镜头、运镜和音效的时间点，全写在一个分镜文件里。画面是一个网页，按时间逐帧截图合成视频；音轨按同一张时间表混出来。改一句台词，重跑一遍，音画自动对齐。</div>
+  </div></div>
+
+  <div class="item"><div class="no">IV</div><div>
+    <div class="h">声音</div>
+    <div class="p">风、雨、雪和键盘声都是用代码合成的，配乐来自 Kevin MacLeod。有一版后半段一直有嗡鸣，调了几次环境声都没用。最后把每条音轨单独拿出来看频谱，才找到是配乐里一个拖得很长的低音。</div>
+  </div></div>
+
+  <div class="item"><div class="no">V</div><div>
+    <div class="h">封面</div>
+    <div class="p">封面试过加对决徽章和报错日志，看上去像页游广告。最后只留了片名和一句话：「他写了十五年代码。它只要三十八秒。」</div>
+  </div></div>
+
+  <div class="item"><div class="no">VI</div><div>
+    <div class="h">旁白</div>
+    <div class="p">初稿的旁白里有很多「不是……而是……」，读起来像在讲道理。改稿时只留人物自己会说的话，比如「写了半辈子代码，最后拿服务器烤手。」</div>
+  </div></div>
+  <div class="rule"></div>
+  <div class="q">“时代变了，摩根先生。”</div>
+  <div class="foot">画面 AI 生成 · 音效程序化合成 · 与 Claude Code 协作制作<br>音乐 Kevin MacLeod (incompetech.com) · CC BY 4.0</div>
+</div>

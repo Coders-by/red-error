@@ -1,0 +1,41 @@
+@font-face { font-family: "Noto Serif SC"; src: url(fonts/NotoSerifSC.ttf); font-weight: 200 900; }
+@font-face { font-family: "Rye"; src: url(fonts/Rye.ttf); }
+@font-face { font-family: "LongCang"; src: url(fonts/LongCang.ttf); }
+@font-face { font-family: "MaShan"; src: url(fonts/MaShanZheng.ttf); }
+@font-face { font-family: "Elite"; src: url(fonts/SpecialElite.ttf); }
+@font-face { font-family: "JBM"; src: url(fonts/JetBrainsMono.ttf); font-weight: 100 800; }
+:root {
+  --paper: #e9dfc8; --paper-d: #cdbf9f; --ink: #1b1712; --red: #a8201a; --gold: #c9a25a;
+  --serif: "Noto Serif SC", serif; --west: "Rye", serif; --hand: "LongCang", cursive; --mono: "JBM", monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 1920px; height: 1080px; overflow: hidden; background: #000; }
+#stage { position: relative; width: 1920px; height: 1080px; overflow: hidden; background: #000;
+  font-family: var(--serif); color: #eee; -webkit-font-smoothing: antialiased; }
+#film { position: absolute; left: 0; top: 132px; width: 1920px; height: 816px; overflow: hidden; background: #000; }
+.layer { position: absolute; inset: 0; opacity: 0; }
+.layer img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform-origin: 50% 50%;
+  will-change: transform; }
+#fx, #grain { position: absolute; inset: 0; pointer-events: none; }
+#grain { mix-blend-mode: overlay; opacity: .075; }
+#vignette { position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse 75% 80% at 50% 48%, transparent 45%, rgba(0,0,0,.55) 85%, rgba(0,0,0,.85) 100%); }
+#filmui { position: absolute; inset: 0; }
+#ui { position: absolute; inset: 0; }
+#bars .bar { position: absolute; left: 0; width: 1920px; height: 132px; background: #000; }
+#bars .top { top: 0; } #bars .bot { bottom: 0; }
+#black { position: absolute; inset: 0; background: #000; opacity: 0; pointer-events: none; }
+#sub { position: absolute; left: 0; right: 0; top: 962px; text-align: center; font-size: 40px; font-weight: 500;
+  letter-spacing: .06em; text-shadow: 0 2px 8px #000; opacity: 0; line-height: 1.3; }
+#sub .txt { color: #f2eee6; }
+#sub .who { display: block; font-size: 20px; font-weight: 600; letter-spacing: .5em; margin-top: 10px; opacity: .85; }
+#sub.vo .txt { font-style: italic; color: #ddd4c2; font-weight: 400; }
+#sub.voice .txt { color: #f6efdd; font-weight: 400; letter-spacing: .12em; }
+/* 默片字卡：书桌上摊开的羊皮卷轴（card_parchment.jpg） */
+#card { position: absolute; inset: 0; opacity: 0; display: flex; align-items: center; justify-content: center; pointer-events: none;
+  background: radial-gradient(ellipse 75% 80% at 51% 51%, transparent 55%, rgba(8,5,3,.55) 100%), url("img_hd/card_parchment.jpg") center / cover no-repeat; }
+#card .frame { position: relative; left: 38px; top: 16px; width: 980px; height: 620px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+#card .ct { position: relative; font-size: 70px; font-weight: 700; color: #2a1a0d; letter-spacing: .1em; text-align: center;
+  max-width: 960px; line-height: 1.45; mix-blend-mode: multiply; opacity: .92; text-shadow: 0 0 2px rgba(42,26,13,.5), 0 0 .6px rgba(42,26,13,.8); }
+#card .ct.hand { font-family: var(--hand); font-weight: 400; font-size: 84px; letter-spacing: 0; white-space: nowrap; }
+#card .cw { position: relative; margin-top: 40px; font-size: 26px; color: #5e3d20; letter-spacing: .5em; font-weight: 600; mix-blend-mode: multiply; opacity: .85; }

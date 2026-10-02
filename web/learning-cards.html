@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<title>红色报错 · 制作学习卡</title>
+<style>
+@font-face{font-family:Serif;src:url(fonts/NotoSerifSC.ttf);font-weight:200 900}
+@font-face{font-family:Hand;src:url(fonts/MaShanZheng.ttf)}
+@font-face{font-family:Rye;src:url(fonts/Rye.ttf)}
+*{box-sizing:border-box;margin:0;letter-spacing:0}
+body{width:1440px;height:1920px;overflow:hidden;background:#221b18;color:#282a29;font-family:Serif,serif}
+.scroll{position:absolute;inset:0;background:url(../out/learning-cards/scroll-background.jpg) center/125% 100% no-repeat}
+.page{position:absolute;inset:225px 183px 205px;display:flex;flex-direction:column}
+.eyebrow{display:flex;align-items:center;justify-content:space-between;color:#40584f;font-size:25px;font-weight:700;border-bottom:2px solid #7d6b4b;padding-bottom:20px}
+.roman{font-family:Rye;font-size:41px;color:#8b2925}
+h1{font-size:76px;font-weight:900;line-height:1.24;margin:19px 0 12px}
+.deck{font-size:29px;line-height:1.7;color:#4e514b;margin-bottom:18px}
+.content{flex:1;min-height:0}
+.still{width:100%;height:190px;object-fit:cover;border:2px solid #857351;filter:saturate(.72);display:block}
+.caption{font-size:23px;color:#526456;margin:10px 0 20px}
+h2{font-size:34px;font-weight:800;color:#7c2824;line-height:1.4;margin-bottom:8px}
+p{font-size:28px;line-height:1.7}
+b{font-weight:800;color:#244a43}
+.section{border-top:1px solid #9a8766;padding-top:16px;margin-top:17px}
+.flow{display:grid;grid-template-columns:1fr 47px 1fr 47px 1fr;align-items:center;margin:24px 0 9px}
+.node{border-top:3px solid #315b51;border-bottom:1px solid #657c6c;padding:12px 8px;text-align:center;background:#f6e9c43d}
+.node strong{display:block;font-size:31px;color:#264e43}
+.node span{display:block;font-size:23px;line-height:1.6;margin-top:7px}
+.arrow{font-size:36px;color:#8b2925;text-align:center}
+.branches{display:grid;grid-template-columns:1fr 1fr;gap:35px;margin:18px 0}
+.branch{border-left:4px solid #315b51;padding-left:19px}
+.branch h2{font-size:32px;color:#264e43}
+.branch p{font-size:25px;line-height:1.65}
+.merge{border-top:1px solid #938468;border-bottom:1px solid #938468;padding:17px 0;text-align:center;font-size:30px;font-weight:700;color:#7c2824;margin-bottom:21px}
+.takeaway{font-family:Hand;font-size:40px;line-height:1.4;color:#244a43;padding-top:17px;margin-top:17px;border-top:2px solid #8d7854}
+.footer{border-top:1px solid #938468;padding-top:19px;margin-top:22px;display:flex;justify-content:space-between;align-items:center;font-size:22px;color:#635b4d}
+.stamp{border:3px solid #8b2925;padding:5px 12px;color:#8b2925;transform:rotate(-5deg);font-family:Hand;font-size:29px}
+.mini-stills{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:19px 0}
+.mini-stills img{width:100%;height:229px;object-fit:cover;border:2px solid #857351}
+.voice-row{display:grid;grid-template-columns:115px 1fr;gap:20px;border-top:1px solid #ac9978;padding:16px 0;font-size:28px;line-height:1.7}
+.voice-row strong{color:#7c2824}
+.statline{display:flex;gap:45px;margin:12px 0 23px;border-top:1px solid #958467;border-bottom:1px solid #958467;padding:21px 0}
+.statline strong{display:block;font-size:48px;font-weight:900;color:#7c2824}
+.statline span{font-size:25px;color:#46574c}
+.steps{font-size:28px;line-height:1.9;border-left:4px solid #315b51;padding-left:22px;margin-top:18px}
+.note{font-size:23px;line-height:1.7;color:#615749;margin-top:12px}
+.compact .section{margin-top:12px;padding-top:12px}
+.compact .steps{line-height:1.75;margin-top:12px}
+</style>
+<div class="scroll"></div><main class="page" id="page"></main>
+<script>
+const cards = [
+{
+ title:'从故事到成片',deck:'AI 生成候选素材，代码把它们组织成电影。',
+ content:`<img class="still" src="img_hd/noon_standoff.jpg"><div class="caption">同一场对决：画面、台词与界面共用时间坐标。</div>
+ <div class="flow"><div class="node"><strong>故事与参考</strong><span>角色 · 世界 · 道具</span></div><div class="arrow">→</div><div class="node"><strong>结构化分镜</strong><span>镜头 · 台词 · 事件</span></div><div class="arrow">→</div><div class="node"><strong>共享时间轴</strong><span>场景起点 · 台词时槽</span></div></div>
+ <div class="branches"><div class="branch"><h2>画面这条线</h2><p>参考图 → 镜头图 → H3 动作<br>字幕、人物卡、日志由代码叠加<br>Chrome 逐帧截图 → 视频</p></div><div class="branch"><h2>声音这条线</h2><p>角色选角 → 逐句 TTS 干声<br>按时槽对齐，加入音乐与音效<br>混音 → 完整声轨</p></div></div>
+ <div class="merge">画面 + 声轨 → 同步剪辑 → FFmpeg 导出 → 检查</div>
+ <div class="section"><h2>分镜是创作源，时间轴是共同约定</h2><p><b>scenes.js</b> 写镜头与台词；构建脚本同时输出网页和音频时间轴。切镜可以绑定“第四句开始”，减少手写秒数。</p></div>
+ <div class="section"><h2>当前是一套项目流程</h2><p>视频经官方 HTTP 调用，<b>尚未部署 MCP</b>。版本脚本仍依赖已有素材，不是通用的一键制片平台。</p></div>
+ <div class="takeaway">把生成的随机性，接进可检查的剪辑。</div>`
+},
+{
+ title:'先有同一个人，再让他动',deck:'一张漂亮的图，需要进入一个连续的世界。',
+ content:`<div class="mini-stills"><img src="../refs/img/ref_laoya.jpg"><img src="img_hd/arthur_face.jpg"></div><div class="caption">固定参考形象 → 相同身份在不同镜头中出现。</div>
+ <div class="section"><h2>01 / 参考图要真的交给模型</h2><p>先固定脸、服装、年龄版本、场景和道具。每个镜头把参考图<b>作为图像输入</b>提交，写明谁在场、站在哪里、拿什么。</p></div>
+ <div class="section"><h2>02 / 一个镜头，承担一个动作</h2><p>交接笔记本、合上电脑、父亲回应孩子，都在推进故事。图生视频先锁住首帧身份，再描述<b>一个主要动作</b>。</p></div>
+ <div class="section"><h2>03 / 把预算留给情绪转折</h2><p>老亚迎战后的目光、达总的回避、阿迭听见“别像我”的反应。<b>镜头动了，不等于人物有感情。</b></p></div>
+ <div class="section"><h2>04 / 返回镜头，不重演动作</h2><p>用 offset 接着播，用 start 延迟动作；素材结束后停在末帧。笔记本不会被反复交接，长停帧仍需要检查。</p></div>
+ <div class="takeaway">观众要认出同一个人，才会关心他的变化。</div>`
+},
+{
+ title:'配音是选角，停顿也是叙事',deck:'声音与剪辑，决定观众如何认识一个人物。',
+ content:`<img class="still" src="img_hd/notebook_hand.jpg"><div class="caption">“去学新的。别像我。”告别需要声音，也需要反应。</div>
+ <div class="voice-row"><strong>老亚</strong><span>磁性、沧桑，但不能衰弱或满是鼻音。试听后选定 D，保存固定 voice ID。</span></div>
+ <div class="voice-row"><strong>萨姐</strong><span>成熟、知性；米尔顿则要浑厚、冷静，让轻蔑藏在礼貌里。</span></div>
+ <div class="voice-row"><strong>孩子</strong><span>画面是女儿，声音也要是女童。年龄与人物设定需要相互印证。</span></div>
+ <div class="section"><h2>同台词、相近响度，再比较</h2><p>不要把“更响”听成“更好”。年龄感来自共鸣、气息、节奏与句尾，<b>单纯降音高并不足够</b>。</p></div>
+ <div class="section"><h2>不是所有文字都需要念出来</h2><p>角色对白补齐，黑屏序幕保持静默。已经批准的尾声“你好，世界。”保留原表演。</p></div>
+ <div class="section"><h2>七秒出品页，后来恢复了</h2><p>缩得太短，后续叙事显得突兀。提速要辨别无意义的等待和<b>必要的电影感带入</b>。</p></div>
+ <div class="takeaway">执行可以交给模型，取舍仍需要判断。</div>`
+},
+{
+ title:'让每一次生成都可追溯',deck:'可复用的制作，依靠记录、边界与验收。',
+ content:`<div class="statline"><div><strong>19</strong><span>个视频素材</span></div><div><strong>150 秒</strong><span>生成素材时长</span></div><div><strong>约 139 元</strong><span>已记录 API 估算</span></div></div>
+ <p class="note">费用范围：MiniMax 视频、配音与声音设计；不含早期图片、人工和设备。不是账户发票，也不是整片全部成本。</p>
+ <div class="section"><h2>付费请求：超时不等于失败</h2><p>发请求前保存指纹与意图，拿到 task ID 后恢复查询。结果不明时先检查平台记录，<b>避免重复付费提交</b>。</p></div>
+ <div class="section"><h2>完成：文件存在还不够</h2><p>检查 checksum、规格和完整解码；检查配音缺句、重叠与峰值。最后抽帧、试听，<b>技术正确不等于表演成立</b>。</p></div>
+ <div class="section"><h2>下一部先做 30–60 秒闭环</h2><div class="steps">一个角色 → 参考图 → 一个主要动作<br>一句对白 → 字幕与声音对齐 → 一次转场<br>短预览检查 → 记录成本 → 扩展整片</div></div>
+ <div class="section"><h2>把效果判断留给新的数据</h2><p>旧稿平均进度为 2 分 16 秒，样本只有 127 播放。补配音与动作是改版假设，<b>还没有新版留存提升的证据</b>。</p></div>
+ <div class="takeaway">用 Agent 讲 Agent，也观察自己如何被改变。</div>`
+}
+];
+const index = Number(new URLSearchParams(location.search).get('page') || 1)-1;
+const data=cards[index];
+if(index===3) document.querySelector('#page').classList.add('compact');
+document.querySelector('#page').innerHTML=`<div class="eyebrow"><span>红色报错：救赎 / 制作学习笔记</span><span class="roman">${['I','II','III','IV'][index]}</span></div><h1>${data.title}</h1><div class="deck">${data.deck}</div><div class="content">${data.content}</div><div class="footer"><span>手搓工作室 · 2026.10 · 基于 v17</span><span class="stamp">制作札记</span><span>${index+1} / 4</span></div>`;
+</script>
+</html>

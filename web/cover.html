@@ -1,0 +1,68 @@
+<!doctype html>
+<meta charset="utf-8">
+<!-- 视频封面排版：cover.html?v=duel|ride|face，用 headless Chrome 截图导出 -->
+<style>
+@font-face { font-family: "Noto Serif SC"; src: url(fonts/NotoSerifSC.ttf); font-weight: 200 900; }
+@font-face { font-family: "Rye"; src: url(fonts/Rye.ttf); }
+@font-face { font-family: "JBM"; src: url(fonts/JetBrainsMono.ttf); font-weight: 100 800; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #000; overflow: hidden; font-family: "Noto Serif SC", serif; color: #e9dfc8; }
+.c { position: relative; overflow: hidden; background: center / cover no-repeat; }
+.c::after { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse 80% 85% at 50% 50%, transparent 55%, rgba(0,0,0,.55) 100%); }
+.t { position: absolute; z-index: 2; display: flex; flex-direction: column; }
+.red { font-weight: 900; color: #b3231b; letter-spacing: .06em; line-height: 1;
+  text-shadow: 0 0 40px rgba(179,35,27,.45), 0 6px 24px rgba(0,0,0,.9); }
+.en { font-family: "Rye", serif; letter-spacing: .32em; color: #efe4c9; text-shadow: 0 3px 14px rgba(0,0,0,.9); }
+.rule { height: 2px; background: linear-gradient(90deg, transparent, #b3231b 15%, #b3231b 85%, transparent); }
+.tag { font-weight: 500; color: #f2e9d4; letter-spacing: .12em; text-shadow: 0 2px 12px rgba(0,0,0,.95); }
+.small { font-weight: 600; letter-spacing: .5em; color: #c9a25a; text-shadow: 0 2px 10px rgba(0,0,0,.9); }
+.q { font-weight: 400; font-style: italic; color: #cbbd9f; letter-spacing: .1em; margin-top: 22px; text-shadow: 0 2px 10px #000; }
+.foot { position: absolute; z-index: 2; font-weight: 600; font-size: 20px; letter-spacing: .3em; color: #a88a52; text-shadow: 0 2px 8px #000; }
+</style>
+<div id="root"></div>
+<script>
+const v = new URLSearchParams(location.search).get("v") || "duel";
+const L = {
+  duel: { w: 1920, h: 1080, img: "cover_duel", pos: "30% 40%", foot: "right:110px; bottom:50px",
+    t: "right:110px; top:190px; align-items:flex-end; text-align:right",
+    red: 200, en: 58, rw: 700, tag: 46, sm: 26,
+    small: "一部向《荒野大镖客：救赎 2》致敬的 AI 短片",
+    smx: "letter-spacing:.22em", tag1: "写了十五年代码的人，", tag2: "和一个永远不会累的对手。", shade: "linear-gradient(270deg, rgba(0,0,0,.72) 0%, rgba(0,0,0,.4) 38%, transparent 62%)" },
+  ride: { w: 1920, h: 1080, img: "cover_ride", pos: "50% 55%",
+    t: "left:120px; top:130px; align-items:flex-start",
+    red: 190, en: 54, rw: 640, tag: 46, sm: 26,
+    small: "西 部 默 片 · 8 分 钟",
+    smx: "color:#f6ecd6;text-shadow:0 1px 3px #000,0 0 14px rgba(0,0,0,.9)", tag1: "我不恨它。", tag2: "谁会去恨一场雪。", shade: "linear-gradient(90deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.25) 35%, transparent 55%)" },
+  face: { w: 1080, h: 1440, img: "cover_redface", pos: "50% 30%", foot: "left:0; right:0; bottom:44px; text-align:center",
+    t: "left:0; right:0; bottom:110px; align-items:center; text-align:center",
+    red: 170, en: 50, rw: 620, tag: 40, sm: 22,
+    small: "一部向《荒野大镖客：救赎 2》致敬的 AI 短片",
+    tag1: "他写了十五年代码。", tag2: "它只要三十八秒。", q: "“时代变了，摩根先生。”", shade: "linear-gradient(0deg, rgba(0,0,0,.92) 0%, rgba(0,0,0,.6) 30%, transparent 55%)" },
+  face43: { w: 1440, h: 1080, img: "cover_redface_43", pos: "50% 40%", foot: "right:70px; bottom:44px",
+    t: "right:70px; top:250px; width:720px; align-items:center; text-align:center",
+    red: 150, en: 44, rw: 560, tag: 38, sm: 22,
+    small: "一部向《荒野大镖客：救赎 2》致敬的 AI 短片",
+    smx: "letter-spacing:.2em", tag1: "他写了十五年代码。", tag2: "它只要三十八秒。", q: "“时代变了，摩根先生。”", shade: "linear-gradient(270deg, rgba(0,0,0,.75) 0%, rgba(0,0,0,.45) 40%, transparent 60%)" },
+  face169: { w: 1920, h: 1080, img: "cover_redface_169", pos: "50% 40%", foot: "right:120px; bottom:50px",
+    t: "right:120px; top:230px; width:900px; align-items:center; text-align:center",
+    red: 190, en: 54, rw: 680, tag: 44, sm: 26,
+    small: "一部向《荒野大镖客：救赎 2》致敬的 AI 短片",
+    smx: "letter-spacing:.22em", tag1: "他写了十五年代码。", tag2: "它只要三十八秒。", q: "“时代变了，摩根先生。”", shade: "linear-gradient(270deg, rgba(0,0,0,.7) 0%, rgba(0,0,0,.4) 40%, transparent 60%)" },
+}[v];
+document.body.style.width = L.w + "px"; document.body.style.height = L.h + "px";
+document.getElementById("root").innerHTML = `
+<div class="c" style="width:${L.w}px;height:${L.h}px;background-image:url(img_hd/${L.img}.jpg);background-position:${L.pos}">
+  <div style="position:absolute;inset:0;z-index:1;background:${L.shade}"></div>
+  <div class="t" style="${L.t}">
+    <div class="small" style="font-size:${L.sm}px;margin-bottom:34px;${L.smx||""}">${L.small}</div>
+    <div class="red" style="font-size:${L.red}px">红色报错</div>
+    <div class="en" style="font-size:${L.en}px;margin-top:22px">REDEMPTION</div>
+    <div class="rule" style="width:${L.rw}px;margin:28px 0 30px"></div>
+    <div class="tag" style="font-size:${L.tag}px">${L.tag1}</div>
+    ${L.tag2 ? `<div class="tag" style="font-size:${L.tag}px;margin-top:10px">${L.tag2}</div>` : ""}
+    ${L.q ? `<div class="q" style="font-size:${Math.round(L.tag*.62)}px">${L.q}</div>` : ""}
+  </div>
+  ${L.foot ? `<div class="foot" style="${L.foot}">${L.fw||"西 部 默 片　·　8 分 钟　·　2026"}</div>` : ""}
+</div>`;
+</script>
